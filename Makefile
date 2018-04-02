@@ -7,13 +7,13 @@
 # The name of your desired GBA game
 # This should be a just a name i.e MyFirstGBAGame
 # No SPACES AFTER THE NAME.
-PROGNAME = 
+PROGNAME = WorldHardestGameAnt
 
 # Here you must put a list of all of the object files
 # that will be compiled into your program. For example
 # if you have main.c and myLib.c then in the following
 # line you would put main.o and myLib.o
-OFILES = 
+OFILES = main.o myLib.o img/welcomeScreen.o text.o font.o
 
 ################################################################################
 # These are various settings used to make the GBA toolchain work

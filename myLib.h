@@ -29,7 +29,7 @@ typedef int s32;
 
 #define TRUE 1
 #define FALSE 0
-
+#define OFFSET(r, c, rowlen) ((c) + (rowlen)*(r))
 
 
 // *** Video =======================================================
@@ -449,3 +449,8 @@ void myfunction(void) MEM_FUNC_IN_IWRAM;
 
 // Prototypes
 void waitForVblank();
+void setPixel(int , int , unsigned short );
+void drawRect(int row, int col, int height, int width, unsigned short color);
+void drawFullscreenImage3(const u16* image);
+void drawImage3(int r, int c, int width, int height, const u16*
+image);
