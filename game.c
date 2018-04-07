@@ -5,6 +5,7 @@
 #include "stdio.h"
 #include <stdbool.h>
 
+#define NENEMIES 4
 void drawFullscreenImage3(const u16* image);
 void waitForVblank();
 void drawString(int row, int col, char str[], unsigned short color);
@@ -13,6 +14,7 @@ char str[60];
 void setPixel(int row, int col, unsigned short color);
 void drawHorizontalLine(int row, int col, int width, unsigned short color);
 void drawVerticalLine(int row, int col, int height, unsigned short color);
+void drawEnemy(ENEMY* enemy, unsigned short color);
 GBAState state;
 
 
@@ -68,9 +70,60 @@ void displayScreen() {
 	state = STATE_RUN;	
 }
 void run() {
-
+	moveEnemies();
 }
 
 void reset() {
 
 }
+
+void moveEnemies() {
+	int size = 16;
+	int row = 30;
+	int col = 20;
+	unsigned int enemiestartRow = row + 20;
+	ENEMY enemies[NENEMIES];
+	ENEMY oldenemies[NENEMIES];
+	player P;
+	P.row = row + 100/2;
+	P.col = col + 15;
+	P.size = 5;
+	drawPlayer(&P);
+	for (int i = 0; i < NENEMIES; i++) {
+		enemies[i].row = enemiestartRow + i*20;
+		enemies[i].col = 240/2;
+		enemies[i].rd = 0;
+		enemies[i].size = size;
+		if (i % 2 == 0)
+		{
+			enemies[i].cd = 2;
+		} else {
+			enemies[i].cd = -2;
+		}
+		oldenemies[i] = enemies[i];
+	}
+	while(1) {
+		for (int i = 0; i < NENEMIES; i++) {
+			ENEMY *enemy = &enemies[i];
+			enemies[i].col = enemy->col + enemy->cd;
+			if(enemy->col < col + 41 + size /2) {
+				enemy->col = col + 42 + size /2;
+				enemy->cd = -enemy->cd;
+			}
+			if(enemy->col > col + 160 -1 - size/2) {
+				enemy->col =  col + 158 - size/2;
+				enemy->cd = -enemy->cd;
+			}
+		}
+		waitForVblank();
+		for (int i = 0; i < NENEMIES; i++) {
+			drawEnemy(&oldenemies[i], GRAY);
+		}
+		for (int i = 0; i < NENEMIES; i++) {
+			drawEnemy(&enemies[i], RED);
+			enemies[i].size = size;
+			oldenemies[i] = enemies[i];
+		}
+	}
+}
+

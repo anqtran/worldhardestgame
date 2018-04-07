@@ -447,6 +447,28 @@ void myfunction(void) MEM_FUNC_IN_IWRAM;
 #define ARR_IN_IWRAM __attribute__ ((section (".iwram")))
 #define MEM_FUNC_IN_IWRAM __attribute__ ((section (".iwram"), long_call))
 
+
+
+
+//----------------------------
+
+typedef struct ENEMY {
+    int row;
+    int col;
+    int rd;
+    int cd;
+    int size;
+} ENEMY;
+
+typedef struct PLAYER {
+    int row;
+    int col;
+    int size;
+} player;
+
+
+
+
 // Prototypes
 void waitForVblank();
 void setPixel(int , int , unsigned short );
@@ -457,3 +479,5 @@ image);
 void drawHollowRect3(int row, int col, int height, int width, unsigned short color);
 void drawHorizontalLine(int row, int col, int width, unsigned short color);
 void drawVerticalLine(int row, int col, int height, unsigned short color);
+void drawEnemy(ENEMY* enemy, unsigned short Ecolor);
+void drawPlayer(player* player);

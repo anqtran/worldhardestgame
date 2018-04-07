@@ -15,3 +15,6 @@ void run();
 void reset();
 void displaytitle();
 void displayScreen();
+void moveEnemies();
+
+
