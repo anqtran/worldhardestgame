@@ -450,7 +450,10 @@ void myfunction(void) MEM_FUNC_IN_IWRAM;
 // Prototypes
 void waitForVblank();
 void setPixel(int , int , unsigned short );
-void drawRect(int row, int col, int height, int width, unsigned short color);
+void drawRect3(int row, int col, int height, int width, unsigned short color);
 void drawFullscreenImage3(const u16* image);
 void drawImage3(int r, int c, int width, int height, const u16*
 image);
+void drawHollowRect3(int row, int col, int height, int width, unsigned short color);
+void drawHorizontalLine(int row, int col, int width, unsigned short color);
+void drawVerticalLine(int row, int col, int height, unsigned short color);
