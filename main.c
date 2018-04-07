@@ -10,7 +10,9 @@ int main () {
 
 	while(1) {
 		waitForVblank();
-
+		if (KEY_DOWN_NOW(BUTTON_SELECT)) {
+			state = STATE_START;
+		}
 		switch(state) {
 			case STATE_START:
 			startGame();
@@ -28,8 +30,12 @@ int main () {
 			run();
 			break;
 			
-			case GAMEOVER:
-			reset();
+			case STATE_WIN:
+			winGame();
+			break;
+
+			case STATE_GAMEOVER:
+			lastScreen();
 			break;
 
 		}

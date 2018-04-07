@@ -468,7 +468,6 @@ typedef struct PLAYER {
 
 
 
-
 // Prototypes
 void waitForVblank();
 void setPixel(int , int , unsigned short );
@@ -480,4 +479,4 @@ void drawHollowRect3(int row, int col, int height, int width, unsigned short col
 void drawHorizontalLine(int row, int col, int width, unsigned short color);
 void drawVerticalLine(int row, int col, int height, unsigned short color);
 void drawEnemy(ENEMY* enemy, unsigned short Ecolor);
-void drawPlayer(player* player);
+void drawPlayer(player* player, unsigned short borderP, unsigned short insideP);

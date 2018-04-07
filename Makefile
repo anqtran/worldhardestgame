@@ -13,7 +13,7 @@ PROGNAME = WorldHardestGameAnt
 # that will be compiled into your program. For example
 # if you have main.c and myLib.c then in the following
 # line you would put main.o and myLib.o
-OFILES = main.o myLib.o  text.o font.o game.o img/startScreen.o
+OFILES = main.o myLib.o  text.o font.o game.o img/startScreen.o img/win.o img/doraemon.o
 
 ################################################################################
 # These are various settings used to make the GBA toolchain work

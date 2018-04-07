@@ -3,18 +3,20 @@
 typedef enum {
 	STATE_START,
 	STATE_RUN,
-	GAMEOVER,
+	STATE_GAMEOVER,
 	STATE_TITLE,
-	STATE_DISPLAYSCREEN
+	STATE_DISPLAYSCREEN,
+	STATE_WIN
+
 } GBAState;
 
 extern GBAState state;
 
 void startGame();
 void run();
-void reset();
+void lastScreen();
 void displaytitle();
 void displayScreen();
 void moveEnemies();
-
-
+void setUp();
+void winGame();

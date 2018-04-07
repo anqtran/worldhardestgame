@@ -40,27 +40,27 @@ void drawFullscreenImage3(const u16* image) {
 }
 
 void drawHollowRect3(int row, int col, int height, int width, unsigned short color) {
-		volatile unsigned short lineColor = color;
+	volatile unsigned short lineColor = color;
 	 	DMA[3].cnt = 0; // clear old flags
-		DMA[3].src = &lineColor;
-		DMA[3].dst = &videoBuffer[OFFSET(row, col, 240)];
-		DMA[3].cnt = width | DMA_ON | DMA_SOURCE_FIXED;
+	 	DMA[3].src = &lineColor;
+	 	DMA[3].dst = &videoBuffer[OFFSET(row, col, 240)];
+	 	DMA[3].cnt = width | DMA_ON | DMA_SOURCE_FIXED;
 
-		DMA[3].src = &color;
-		DMA[3].dst = &videoBuffer[OFFSET(row + height - 1, col, 240)];
-		DMA[3].cnt = width | DMA_ON | DMA_SOURCE_FIXED;
+	 	DMA[3].src = &color;
+	 	DMA[3].dst = &videoBuffer[OFFSET(row + height - 1, col, 240)];
+	 	DMA[3].cnt = width | DMA_ON | DMA_SOURCE_FIXED;
 
-		for(int r = row; r < height + row; r++) {
-			setPixel(r, col, color);
-			setPixel(r, col + width, color);
-		}
+	 	for(int r = row; r < height + row; r++) {
+	 		setPixel(r, col, color);
+	 		setPixel(r, col + width, color);
+	 	}
 
-}
+	 }
 
 // faster DMA loop (per row) version
-void drawRect3(int row, int col, int height, int width, unsigned short color) {
-		volatile unsigned short lineColor = color;
-	for(int r=0; r < height; r++) {
+	 void drawRect3(int row, int col, int height, int width, unsigned short color) {
+	 	volatile unsigned short lineColor = color;
+	 	for(int r=0; r < height; r++) {
 		DMA[3].cnt = 0; // clear old flags
 		DMA[3].src = &lineColor;
 		DMA[3].dst = &videoBuffer[OFFSET(row + r, col, 240)];
@@ -69,30 +69,30 @@ void drawRect3(int row, int col, int height, int width, unsigned short color) {
 }
 
 void drawHorizontalLine(int row, int col, int width, unsigned short color) {
-		volatile unsigned short lineColor = color;
+	volatile unsigned short lineColor = color;
 		DMA[3].cnt = 0; // clear old flags
 		DMA[3].src = &lineColor;
 		DMA[3].dst = &videoBuffer[OFFSET(row, col, 240)];
 		DMA[3].cnt = width | DMA_ON | DMA_SOURCE_FIXED;
-}
-void drawVerticalLine(int row, int col, int height, unsigned short color) {
-	for (int i = 0; i < height; ++i)
-	{
-		setPixel(row + i, col, color);
 	}
-}
+	void drawVerticalLine(int row, int col, int height, unsigned short color) {
+		for (int i = 0; i < height; ++i)
+		{
+			setPixel(row + i, col, color);
+		}
+	}
 
-void drawEnemy(ENEMY* enemy, unsigned short Ecolor) {
-	volatile unsigned short color = Ecolor;
-	u16 size = enemy -> size;
-	drawRect3(enemy -> row - size/2, enemy -> col - size/2, size, size, color);
-}
+	void drawEnemy(ENEMY* enemy, unsigned short Ecolor) {
+		volatile unsigned short color = Ecolor;
+		u16 size = enemy -> size;
+		drawRect3(enemy -> row - size/2, enemy -> col - size/2, size, size, color);
+	}
 
-void drawPlayer(player* player) {
-	volatile unsigned short border = BLACK;
-	volatile unsigned short inside = GREEN;
-	u16 size = player -> size;
-	drawRect3(player -> row - size/2, player -> col - size/2, size, size, inside);
-	drawHollowRect3(player -> row - size/2, player -> col - size/2, size, size, border);
-}
+	void drawPlayer(player* player, unsigned short borderP, unsigned short insideP) {
+		volatile unsigned short border = borderP;
+		volatile unsigned short inside = insideP;
+		u16 size = player -> size;
+		drawRect3(player -> row - size/2, player -> col - size/2, size, size, inside);
+		drawHollowRect3(player -> row - size/2, player -> col - size/2, size, size, border);
+	}
 
